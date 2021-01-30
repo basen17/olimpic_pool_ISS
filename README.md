@@ -1,2 +1,3 @@
-# ISS_project
-Flask app for Olimpic Pool
+# Oplimpic Pool 
+Olimpic Pool managment via Flask app.
+Project for ISS.
