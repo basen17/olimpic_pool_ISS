@@ -1,0 +1,23 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+<script>
+
+function loadNewData(){
+    $.ajax({
+        url:"/update_values",
+        type: "POST",
+        dataType: "json",
+        success: function(data){
+            $(update_values).replaceWith(data)
+        }
+    });
+}
+
+</script>
+
+<div id="water_level_update">
+    {{ img }}
+    {{ water_level }}
+    {{ set_water_level }}
+    {{ approx_time }}
+</div>

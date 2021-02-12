@@ -1,0 +1,25 @@
+body {
+    margin: 10;
+    font-family: sans-serif;
+    
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    margin: 10px;
+}
+
+image {
+    margin: 30px;
+}
+
+table{
+    text-align: center;
+    background-color: red;
+    color: black;
+    outline-style: solid;
+    
+}

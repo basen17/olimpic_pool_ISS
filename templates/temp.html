@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <head>
+        <title>Olimpic Pool Regulator</title>
+        <link rel="stylesheer" href='../static/css/temp_css.css'/>
+    </head>
+    <body>
+        <h1>PID Regulator</h1>
+        
+            <!-- <image src="{{ url_for('static', filename= 'img/water_level_0.0.png')}}"> -->
+        <script>        
+            $(function(){
+                window.setInterval(function(){
+                loadNewDate()
+            },1000)
+
+            function loadNewDate(){
+                $.ajax({
+                    url:"/update_date",
+                    type:"POST",
+                    dataType: "json",
+                    success: function(data){
+                        $(update_time).replaceWith(data)
+                    }
+            
+                });
+            }
+            });
+        </script>
+        <div id="update_time">
+            Time: {{ time }}
+        </div>
+        <script>
+            $(function(){
+                window.setInterval(function(){
+                loadWaterLevel()
+            },100)
+
+            function loadWaterLevel(){
+                $.ajax({
+                    url:"/update_current_water_level",
+                    type:"POST",
+                    dataType: "json",
+                    success: function(water_level){
+                        $(update_current_water_level).replaceWith(water_level)
+                    }
+            
+                });
+            }
+            });
+        </script>
+        <div id="update_pool">
+            Current water level: {{ current_water_level }}
+        </div>
+        <h4> 
+            <form action='/' method="POST">
+                <label for="target_water_level">Target water level</label>
+                <input type="float" name="target_water_level" id="target_water_level">
+                <input type="submit" value="Set">
+            </form>
+        </h4>
+    </body>
+</html>
