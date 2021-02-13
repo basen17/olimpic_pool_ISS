@@ -46,12 +46,6 @@ def update_date():
     timeString = now.strftime("%Y-%m-%d %H:%M:%S")
     return jsonify('', render_template('update_time.html', time=timeString))
 
-# @app.route('/set_target_water_level', methods=['POST'])
-# def set_target_water_level():
-#     if request.method == 'POST':
-#         pool.target_water_level = request.form['target_water_level']
-#         templateData.update(pool.target_water_level)
-#     return render_template('temp.html', **templateData)
 
 @app.route('/update_current_water_level', methods=['POST'])
 def update_current_water_level():
@@ -64,59 +58,6 @@ def update_current_water_level():
 def update_image():
     pool.SetImagePath()
     return jsonify('', render_template('update_img.html', image_path=pool.image_path))
-
-# @app.route('/update', methods=['POST'])
-# def update_values():
-#     if request.method == 'POST':
-#         twl = request.form['target_water_level']
-#         twl = pool.CalculateLevelChange(twl)
-#         # pool.SetImagePath
-#         # templateData['target_water_level'] = target_water_level
-
-#     return jsonify('', render_template('update_pool.html', current_water_level = pool.current_water_level))
-
-
-
-
-
-# @app.route('/update')
-#     pool.
-
-# @app.route('/', methods=['GET', 'POST'])
-# def homepage():
-#     now = datetime.datetime.now()
-#     timeString = now.strftime("%Y-%m-%d %H:%M:%S")
-#     templateData = {
-#             'title' : 'Olimpic Pool Regulator',
-#             'time' : timeString,
-#             #'image_path' : pool.image_path,
-#             #'image_path' : 'img/water_level_0.0.png',
-#             'current_water_level' : pool.current_water_level,
-#             'target_water_level' : pool.target_water_level
-
-#         }
-#     if request.method == 'POST':
-#         twl = request.form['target_water_level']
-#         print(pool.target_water_level,flush=True)
-#         pool.target_water_level = twl
-#         print(pool.target_water_level)
-#         pool.current_water_level = twl
-        
-        
-#         return render_template('temp.html', **templateData)
-#     else:
-#         return render_template('temp.html', **templateData)
-    #return render_template('home.html', img=image_path, water_level=wt, set_water_level=swl, approx_time=a_time)
-
-
-
-# @app.route('/update_values', methods=['POST', 'GET'])
-# def updatevalues():
-#     if request.method == 'POST':
-
-
-
-
 
 
 if __name__ == "__main__":
