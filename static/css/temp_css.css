@@ -1,0 +1,19 @@
+body{ 
+    background-color: aqua;
+}
+
+h1 { 
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
+
+h2 {
+    color: azure;
+}
+
+h3 {
+    color: azure;
+}
+

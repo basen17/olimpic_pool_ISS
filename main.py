@@ -24,6 +24,12 @@ timeString = now.strftime("%Y-%m-%d %H:%M:%S")
 templateData = {
     'title' : 'Olimpic Pool Regulator',
     'time' : timeString,
+    'pool_height' : pool.height,
+    'pool_width' : pool.width,
+    'pool_length' : pool.length,
+    'P' : P,
+    'I' : I,
+    'D' : D
 }
 
 @app.route('/',methods=['GET', 'POST'])
@@ -32,7 +38,7 @@ def homepage():
         twl = request.form['target_water_level']
         pool.target_water_level = float(twl)
 
-    return render_template('temp.html', **templateData, current_water_level = pool.current_water_level)
+    return render_template('temp.html', **templateData, current_water_level = pool.current_water_level, target_water_level = pool.target_water_level)
 
 @app.route('/update_date', methods=['POST'])
 def update_date():
@@ -53,6 +59,11 @@ def update_current_water_level():
     u=pid(pool.current_water_level)
     pool.CalculateLevelChange(u)
     return jsonify('', render_template('update_current_water_level.html', current_water_level=pool.current_water_level))
+
+@app.route('/update_img', methods=['POST'])
+def update_image():
+    pool.SetImagePath()
+    return jsonify('', render_template('update_img.html', image_path=pool.image_path))
 
 # @app.route('/update', methods=['POST'])
 # def update_values():
