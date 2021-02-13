@@ -1,9 +1,28 @@
-class Pool:
+class Pool():
     """  
     Pool class responsible for managing pool values
     """
 
-    def __init__(self, Q, Tp, length, width, height):
+    def __init__(self, Q=1.0, Tp=1.0, length=1.0, width=1.0, height=2.1):
+                #self, Kp=1.0, Ki=0.0, Kd=0.0,
+                #setpoint=0,
+                #sample_time=0.01,
+                
+                #output_limits=(None, None),
+                #auto_mode=True,
+                #proportional_on_measurement=False
+                 
+
+        # super().__init__()
+        # self.Kp, self.Ki, self.Kd = Kp, Ki, Kd
+        # self.setpoint = setpoint
+        # self.sample_time = sample_time
+
+        # self._min_output, self._max_output = output_limits
+        # self._auto_mode = auto_mode
+        # self.proportional_on_measurement = proportional_on_measurement
+
+
         self.Q = Q
         self.Tp = Tp
 
@@ -20,6 +39,8 @@ class Pool:
         self.image_path = ''
 
         self.exit_code = 0
+
+        # self.reset()
 
 
     def SetImagePath(self):
@@ -73,16 +94,18 @@ class Pool:
             print ('Error: Incorrect water level! No image chosen!')
             self.exit_code = 1
 
-    def CalculateLevelChange(self):
+    def CalculateLevelChange(self, u):
         print('target water level: ' + str(self.target_water_level), flush=True)
         self.exit_code = 0
         if self.target_water_level != self.current_water_level:
             if self.target_water_level > 0 and self.target_water_level < 2.1:
                 if self.target_water_level > self.current_water_level:
-                    self.current_water_level = 1 / self.ground_size * (-self.Q * 0.05 * self.Tp + (self.Q * self.target_water_level) / 100) + self.current_water_level
+                    self.current_water_level = 1 / self.ground_size * (-self.Q * 0.05 * self.Tp + (self.Q * u) / 100) + self.current_water_level
                 else:
-                    self.current_water_level = 1 / self.ground_size * ((self.Q * self.target_water_level) / 100 + self.Q * 0.05 * self.Tp) + self.current_water_level
+                    self.current_water_level = 1 / self.ground_size * ((self.Q * u) / 100 + self.Q * 0.05 * self.Tp) + self.current_water_level
             else:
                 print('ERROR: Water level out of the range!', flush=True) 
                 self.exit_code = 1
+
         print('Current water level: ' + str(self.current_water_level), flush=True)
+
